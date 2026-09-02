@@ -1,0 +1,16 @@
+{
+  "hosts": [
+    {
+      "name": "lab-server-01",
+      "hostname": "192.0.2.10",
+      "port": 22,
+      "username": "labadmin"
+    },
+    {
+      "name": "lab-server-02",
+      "hostname": "192.0.2.11",
+      "port": 22,
+      "username": "labadmin"
+    }
+  ]
+}
