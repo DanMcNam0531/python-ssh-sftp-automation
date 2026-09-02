@@ -1,52 +1,67 @@
 # Python SSH/SFTP Automation
 
-## Project Status
-
-**Completed academic project — source-code sanitization in progress**
-
 ## Overview
 
-This project automated authorized SSH and SFTP tasks across multiple lab hosts. It was designed to continue processing when an individual system was unavailable and to report connection or transfer errors clearly.
+This Python project automates authorized SFTP uploads across multiple lab hosts while handling unreachable systems, timeouts, authentication failures, and transfer errors without exposing credentials.
 
-## Implemented Capabilities
+## Features
 
-- Processed multiple approved hosts.
-- Established SSH/SFTP connections in an authorized environment.
-- Supported automated file-transfer tasks.
-- Handled offline and unreachable hosts.
-- Included timeout and exception handling.
-- Reported errors without stopping the entire workflow.
+- JSON-based multi-host configuration
+- Configurable SSH port and connection timeout
+- Strict known-host verification through Paramiko
+- Password collection through an environment variable or secure prompt
+- Per-host success and error reporting
+- Continued processing when an individual host is offline
+- Nonzero exit status when one or more transfers fail
 
-## Security Considerations
+## Project Structure
 
-Before the original source is published, the portfolio version will:
+```text
+├── hosts.example.json
+├── requirements.txt
+├── src/
+│   └── ssh_sftp.py
+└── tests/
+    └── test_config.py
+```
 
-- Remove usernames, passwords, hostnames, and private addressing information.
-- Avoid hard-coded credentials.
-- Use configuration or environment variables for sensitive values.
-- Document host-key verification and authorized-use requirements.
-- Include safe example configuration data.
+## Installation
 
-## Planned Repository Structure
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
 
-    python-ssh-sftp-automation/
-    ├── README.md
-    ├── src/
-    ├── config/
-    ├── examples/
-    └── tests/
+## Usage
 
-## Skills Demonstrated
+```bash
+export SFTP_PASSWORD='use-a-secret-manager-in-production'
+python src/ssh_sftp.py \
+  --config hosts.json \
+  --local-file example.txt \
+  --remote-path /tmp/example.txt \
+  --timeout 3
+```
 
-Python automation, SSH/SFTP administration, multi-host processing, exception handling, timeout management, troubleshooting, and secure credential handling.
+Copy `hosts.example.json` to `hosts.json` and replace the documentation-range addresses with authorized lab systems. The Python `.gitignore` prevents local environment and common secret files from being committed.
+
+## Validation
+
+- Python source passes compilation checks.
+- Unit tests validate host configuration and reject empty inventories.
+- Example addresses use the RFC 5737 documentation range.
+- Passwords and private host information are excluded from the repository.
+
+## Run Tests
+
+```bash
+python -m unittest tests/test_config.py -v
+```
 
 ## Authorized Use
 
-This project is intended only for systems the operator owns or has explicit permission to administer.
-
-## Source-Code Notice
-
-The original code is not yet included because it must be reviewed and sanitized before public release. This notice will be removed after the portfolio-safe version is added and tested.
+Use this tool only with systems you own or are explicitly authorized to administer.
 
 ## Author
 
