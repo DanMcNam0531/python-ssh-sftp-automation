@@ -21,6 +21,8 @@ This Python project automates authorized SFTP uploads across multiple lab hosts 
 ├── requirements.txt
 ├── src/
 │   └── ssh_sftp.py
+├── sample-output/
+│   └── success-and-offline-host.txt
 └── tests/
     └── test_config.py
 ```
@@ -50,6 +52,7 @@ Copy `hosts.example.json` to `hosts.json` and replace the documentation-range ad
 
 - Python source passes compilation checks.
 - Unit tests validate host configuration and reject empty inventories.
+- Tests verify custom ports, successful transfer reporting, timeout handling, and suppression of sensitive exception details.
 - Example addresses use the RFC 5737 documentation range.
 - Passwords and private host information are excluded from the repository.
 
@@ -58,6 +61,10 @@ Copy `hosts.example.json` to `hosts.json` and replace the documentation-range ad
 ```bash
 python -m unittest tests/test_config.py -v
 ```
+
+## Sample Output
+
+[View a sanitized success and offline-host run](sample-output/success-and-offline-host.txt). The output demonstrates continued processing and a nonzero exit status when any authorized host fails.
 
 ## Authorized Use
 
