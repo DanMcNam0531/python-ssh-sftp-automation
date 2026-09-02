@@ -1,0 +1,7 @@
+$ python src/ssh_sftp.py --config hosts.example.json --local-file sample.txt --remote-path /tmp/sample.txt --timeout 3
+linux-lab-01: upload completed
+offline-lab-host: upload failed (TimeoutError)
+
+Exit status: 1
+
+The hostnames and result are sanitized examples matching the program's output format. The nonzero exit status demonstrates partial-failure reporting across multiple authorized hosts.
